@@ -1,0 +1,258 @@
+﻿@using Blog.Models
+@model Blog.ViewModels.ArticleViewModel
+
+@{
+	ViewBag.Title = "Article";
+	Layout = "~/Views/Blogger/_MasterPage.cshtml";
+	var blogger = (tbl_blogger)Session["Blogger"];
+}
+
+@section Styles {
+	<!-- Include Editor style. -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+}
+
+<div class="container mt-5">
+	<h5 class="text-success text-center">@TempData["Success"]</h5>
+	<h5 class="text-danger text-center">@TempData["Error"]</h5>
+	<nav>
+		<div class="nav nav-tabs" id="nav-tab" role="tablist">
+			<a class="nav-item nav-link active" id="nav-article-tab" data-toggle="tab" href="#nav-article" role="tab" aria-controls="nav-article" aria-selected="true">Total Article <span class="badge badge-success">@Model.article.Count</span></a>
+			<div class="p-2">Total views <span class="badge badge-success">@Model.article.Sum(x => x.Views)</span></div>
+			<a class="nav-item nav-link" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="false">Add New Article</a>
+		</div>
+	</nav>
+	<div class="tab-content mt-3" id="nav-tabContent">
+		<div class="tab-pane fade show active" id="nav-article" role="tabpanel" aria-labelledby="nav-article-tab">
+			<table id="table_id" class="table table-striped table-bordered order-column" width="100%">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Category</th>
+						<th>Views</th>
+						<th>Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Title</th>
+						<th>Category</th>
+						<th>Views</th>
+						<th>Date</th>
+						<th>Action</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var article in Model.article)
+					{
+						var title = "";
+						if (article.Title.Length > 60)
+						{
+							title = article.Title.Substring(0, 60) + " ...";
+						}
+						else
+						{
+							title = article.Title;
+						}
+						<tr>
+							<td><a href="/Home/Details/@article.ID" class="text-primary" style="text-decoration: none;">@title</a></td>
+							<td><a href="/Home/Category/@article.CategoryID" class="text-primary" style="text-decoration: none;">@article.tbl_category.Name</a></td>
+							<td>@article.Views</td>
+							<td>@article.Date</td>
+							<td>
+								@if (article.Status == 1)
+								{
+									<button class="btn btn-success" type="button"><i class="fas fa-check"></i></button>
+								}
+								else
+								{
+									<button class="btn btn-dark" type="button"><i class="fas fa-times"></i></button>
+								}
+								<button type="button" class="btn btn-info" data-toggle="modal" data-target=".article-@article.ID"><i class="far fa-edit"></i></button>
+								<div class="modal fade article-@article.ID" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Edit Article</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<form class="mt-3" action="/Blogger/ArticleUpdate/@article.ID" method="post" enctype="multipart/form-data">
+													<input type="hidden" name="BloggerID" value="@blogger.ID" />
+													<input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()" />
+													<input type="hidden" name="Views" value="@article.Views" />
+													<input type="hidden" name="Status" value="@article.Status" />
+													<div class="input-group mb-3">
+														<div class="input-group-prepend">
+															<span class="input-group-text" id="basic-addon1">Title</span>
+														</div>
+														<input type="text" name="Title" value="@article.Title" class="form-control" placeholder="Write title here..." aria-label="Username" aria-describedby="basic-addon1" required>
+													</div>
+													<div class="form-group">
+														<textarea name="Details" class="form-control" id="exampleFormControlTextarea1" required>@article.Details</textarea>
+													</div>
+													<div class="form-row">
+														<div class="form-group col-md-12">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<label class="input-group-text" for="inputGroupSelect01">Category</label>
+																</div>
+																<select name="CategoryID" class="custom-select" id="inputGroupSelect01" required>
+
+																	@foreach (var category in Model.category)
+					{
+						if (category.ID == article.CategoryID)
+						{
+												<option value="@category.ID" selected>@category.Name</option>
+}
+else
+{
+												<option value="@category.ID">@category.Name</option>
+}
+}
+																</select>
+															</div>
+														</div>
+														<div class="form-group col-md-12">
+															<img src="../../Images/@article.Image" alt="@article.Image" class="w-100 mb-3">
+															<input name="Image" type="file" id="inputGroupFile01">
+															<input type="hidden" name="OldImage" value="@article.Image" />
+														</div>
+
+														<div class="form-group col-md-6">
+															<button type="submit" class="btn btn-success btn-block">Save Article</button>
+														</div>
+														<div class="form-group col-md-6">
+															<button type="reset" class="btn btn-info btn-block">Reset Form</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal-@article.ID"><i class="far fa-trash-alt"></i></button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="Modal-@article.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title text-center" id="exampleModalLabel">Delete Article</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">Are you sure ?</div>
+											<div class="modal-footer">
+												<form action="/Blogger/ArticleDelete/@article.ID" method="post" class="d-inline">
+													<button type="submit" class="btn btn-primary">Yes</button>
+												</form>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+
+
+		<div class="tab-pane fade" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab">
+			<form class="mt-3" action="/Blogger/ArticleCreate" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="BloggerID" value="@blogger.ID" />
+				<input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()" />
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">Title</span>
+					</div>
+					<input type="text" name="Title" class="form-control" placeholder="Write title here..." aria-label="Username" aria-describedby="basic-addon1" required>
+				</div>
+				<div class="form-group">
+					<textarea name="Details" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="inputGroupSelect01">Category</label>
+							</div>
+							<select name="CategoryID" class="custom-select" id="inputGroupSelect01" required>
+								<option value="">Select Category</option>
+								@foreach (var category in Model.category)
+								{
+									<option value="@category.ID">@category.Name</option>
+								}
+							</select>
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<input name="Image" type="file" class="" id="inputGroupFile01" required>
+					</div>
+
+					<div class="form-group col-md-3">
+						<button type="submit" class="btn btn-success btn-block">Save Article</button>
+					</div>
+					<div class="form-group col-md-3">
+						<button type="reset" class="btn btn-info btn-block">Reset Form</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/js/froala_editor.pkgd.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+<!-- Initialize the editor. -->
+<script>	$(function () { $('textarea').froalaEditor() });</script>
+
+<script>
+	$(document).ready(function () {
+		$('#table_id').DataTable();
+	});
+</script>
+
+@section Scripts {
+
+	<!-- Include Editor JS files. -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/js/froala_editor.pkgd.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+	<!-- Initialize the editor. -->
+	<script>	$(function () { $('textarea').froalaEditor() });</script>
+
+	<script>
+		$(document).ready(function () {
+			$('#table_id').DataTable();
+		});
+	</script>
+}
+

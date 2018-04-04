@@ -1,0 +1,190 @@
+﻿@using Blog.Models
+
+@{
+	var blogger = (tbl_blogger)Session["Blogger"];
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	<link rel="shortcut icon" href="~/Images/title-icon.png" type="image/x-icon">
+
+	<!-- Facebook Meta -->
+	<meta property="fb:app_id" content="1969071546664594" />
+	<meta property="og:url" content="http://www.aiblog.somee.com/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{ Ai - Blog }" />
+	<meta property="og:description" content="World’s most insightful writers, thinkers, and storytellers to you the smartest takes on topics that matter." />
+	<meta property="og:image" content="http://www.aiblog.somee.com/Images/blog_header.jpg" />
+
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+	@RenderSection("styles", required: false)
+</head>
+<body>
+	<div id="fb-root"></div>
+	<script>
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1969071546664594&autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<form class="form-inline mr-auto my-2 my-lg-0" action="/Home/Search" method="get">
+				<input class="form-control mr-sm-2" type="search" name="Search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-white my-2 my-sm-0" type="submit">Search</button>
+			</form>
+			<a class="navbar-brand mr-auto" href="/" style="
+															font-family: 'Montserrat', sans-serif;
+															font-size: 2rem;
+															letter-spacing: 10px;">{ Ai - Blog }</a>
+			<ul class="navbar-nav">
+				@if (blogger == null)
+				{
+					<li class="nav-item">
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#regModal"><i class="fas fa-file-alt"></i> SignUp</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<form action="/Blogger/SignUp" method="post">
+										<div class="modal-body">
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">Name</span>
+												</div>
+												<input type="text" name="Name" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">Email</span>
+												</div>
+												<input type="email" name="Email" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">Password</span>
+												</div>
+												<input type="password" name="Password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+											</div>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Sign Up</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="nav-item">
+						<button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i> SignIn</button>
+						<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Login Form</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<form action="/Blogger/Login" method="post">
+										<div class="modal-body">
+
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">Email</span>
+												</div>
+												<input type="email" name="Email" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">Password</span>
+												</div>
+												<input type="password" name="Password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+											</div>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Login</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+				}
+				else
+				{
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../../Images/@blogger.Image" style="width: 30px;height: 30px;border-radius: 100%;"> @blogger.Name
+						</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/Blogger/Article"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+							<a class="dropdown-item" href="/Home/Profile/@blogger.ID"><i class="fas fa-user"></i> Profile</a>
+							<a class="dropdown-item" href="/Blogger/Logout"><i class="fas fa-sign-out-alt"></i> LogOut</a>
+						</div>
+					</li>
+				}
+			</ul>
+		</div>
+	</nav>
+
+	@RenderBody()
+
+	<div class="jumbotron text-center py-3 px-0 mb-0 mt-3">
+		<h1 class="display-4">
+			<a class="navbar-brand text-dark" href="/" style="
+															font-family: 'Montserrat', sans-serif;
+															font-size: 3rem;
+															letter-spacing: 10px;">{ Ai - Blog }</a>
+		</h1>
+		<p class="lead">{ Ai - Blog } taps into the brains of the world’s most insightful writers, thinkers,<br />and storytellers to you the smartest takes on topics that matter.<br />So whatever your interest, you can always find fresh thinking and unique perspectives.</p>
+
+		<hr />
+		
+		<div class="card border-0" style="background: transparent">
+			<div class="card-body p-0">
+				Design & Developed By <a href="https://www.facebook.com/airocky88">Rocky Shamsul Alam</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+	@RenderSection("scripts", required: false)
+</body>
+</html>

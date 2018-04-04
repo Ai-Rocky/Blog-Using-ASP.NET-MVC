@@ -1,0 +1,77 @@
+F:\PROGRAM\C#\Blog\Blog\bin\Blog.dll.config
+F:\PROGRAM\C#\Blog\Blog\bin\Blog.dll
+F:\PROGRAM\C#\Blog\Blog\bin\Blog.pdb
+F:\PROGRAM\C#\Blog\Blog\bin\EntityFramework.dll
+F:\PROGRAM\C#\Blog\Blog\bin\EntityFramework.SqlServer.dll
+F:\PROGRAM\C#\Blog\Blog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\PROGRAM\C#\Blog\Blog\bin\Microsoft.Web.Infrastructure.dll
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Helpers.dll
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Mvc.dll
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Razor.dll
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Webpages.Deployment.dll
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Webpages.dll
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Webpages.Razor.dll
+F:\PROGRAM\C#\Blog\Blog\bin\EntityFramework.xml
+F:\PROGRAM\C#\Blog\Blog\bin\EntityFramework.SqlServer.xml
+F:\PROGRAM\C#\Blog\Blog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Razor.xml
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Webpages.xml
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Webpages.Deployment.xml
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Webpages.Razor.xml
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Helpers.xml
+F:\PROGRAM\C#\Blog\Blog\bin\System.Web.Mvc.xml
+F:\PROGRAM\C#\Blog\Blog\obj\Debug\Blog.csprojResolveAssemblyReference.cache
+F:\PROGRAM\C#\Blog\Blog\obj\Debug\Blog.csproj.CoreCompileInputs.cache
+F:\PROGRAM\C#\Blog\Blog\obj\Debug\Blog.dll
+F:\PROGRAM\C#\Blog\Blog\obj\Debug\Blog.pdb
+C:\Users\airoc\Desktop\Blog\Blog\bin\Blog.dll.config
+C:\Users\airoc\Desktop\Blog\Blog\bin\Blog.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\Blog.pdb
+C:\Users\airoc\Desktop\Blog\Blog\bin\EntityFramework.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\EntityFramework.SqlServer.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Helpers.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Mvc.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Razor.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Webpages.Deployment.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Webpages.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Webpages.Razor.dll
+C:\Users\airoc\Desktop\Blog\Blog\bin\EntityFramework.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\EntityFramework.SqlServer.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Razor.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Webpages.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Webpages.Deployment.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Webpages.Razor.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Helpers.xml
+C:\Users\airoc\Desktop\Blog\Blog\bin\System.Web.Mvc.xml
+C:\Users\airoc\Desktop\Blog\Blog\obj\Debug\Blog.csproj.CoreCompileInputs.cache
+C:\Users\airoc\Desktop\Blog\Blog\obj\Debug\Blog.dll
+C:\Users\airoc\Desktop\Blog\Blog\obj\Debug\Blog.pdb
+F:\PROJECT\Blog - ASP.Net\Blog\bin\Blog.dll.config
+F:\PROJECT\Blog - ASP.Net\Blog\bin\Blog.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\Blog.pdb
+F:\PROJECT\Blog - ASP.Net\Blog\bin\EntityFramework.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\EntityFramework.SqlServer.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\Microsoft.Web.Infrastructure.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Helpers.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Mvc.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Razor.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Webpages.Deployment.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Webpages.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Webpages.Razor.dll
+F:\PROJECT\Blog - ASP.Net\Blog\bin\EntityFramework.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\EntityFramework.SqlServer.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Razor.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Webpages.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Webpages.Deployment.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Webpages.Razor.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Helpers.xml
+F:\PROJECT\Blog - ASP.Net\Blog\bin\System.Web.Mvc.xml
+F:\PROJECT\Blog - ASP.Net\Blog\obj\Debug\Blog.csprojResolveAssemblyReference.cache
+F:\PROJECT\Blog - ASP.Net\Blog\obj\Debug\Blog.csproj.CoreCompileInputs.cache
+F:\PROJECT\Blog - ASP.Net\Blog\obj\Debug\Blog.dll
+F:\PROJECT\Blog - ASP.Net\Blog\obj\Debug\Blog.pdb

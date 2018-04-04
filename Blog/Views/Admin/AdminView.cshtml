@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Blog.Models.tbl_admin>
+
+@{
+	ViewBag.Title = "AdminView";
+	Layout = "_MasterPage.cshtml";
+}
+
+@section Styles {
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+}
+
+<div class="container mt-4">
+	<h1 class="display-4 text-center">Total Admin <span class="badge badge-success">@Model.Count()</span></h1><hr>
+	<form action="/Admin/AdminCreate" method="post">
+		<div class="row">
+			<div class="col">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">Name</span>
+					</div>
+					<input type="text" class="form-control" name="Name" placeholder="" aria-label="name" aria-describedby="basic-addon1" required>
+				</div>
+			</div>
+			<div class="col">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">Email</span>
+					</div>
+					<input type="email" name="Email" class="form-control" placeholder="" aria-label="email" aria-describedby="basic-addon1" required>
+				</div>
+			</div>
+			<div class="col">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">Password</span>
+					</div>
+					<input type="password" name="Password" class="form-control" placeholder="" aria-label="password" aria-describedby="basic-addon1" required>
+				</div>
+			</div>
+			<div class="col">
+				<button class="btn btn-success btn-block" type="submit">Add Admin</button>
+			</div>
+		</div>
+	</form><hr>
+	<table id="table_id" class="table table-striped table-bordered order-column" width="100%">
+		<thead>
+			<tr>
+				<th scope="col">Admin Name</th>
+				<th scope="col">Admin Email</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th scope="col">Admin Name</th>
+				<th scope="col">Admin Email</th>
+				<th scope="col">Action</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			@foreach (var admin in Model)
+			{
+				<tr>
+					<td>@admin.Name</td>
+					<td>@admin.Email</td>
+					<td>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal-@admin.ID"><i class="far fa-trash-alt"></i></button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="Modal-@admin.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title text-center" id="exampleModalLabel">Delete Admin</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">Are you sure ?</div>
+									<div class="modal-footer">
+										<form action="/Admin/AdminDelete/@admin.ID" method="post" class="d-inline">
+											<button type="submit" class="btn btn-primary">Yes</button>
+										</form>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+@section Scripts {
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#table_id').DataTable();
+		});
+	</script>
+}
+

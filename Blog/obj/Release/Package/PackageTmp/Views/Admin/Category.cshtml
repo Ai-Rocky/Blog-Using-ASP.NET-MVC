@@ -1,0 +1,163 @@
+﻿@model IEnumerable<Blog.Models.tbl_category>
+
+@{
+	ViewBag.Title = "Category";
+	Layout = "_MasterPage.cshtml";
+
+}
+
+@section Styles {
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+}
+
+<div class="container mt-5">
+	<form action="/Admin/CategoryCreate" method="post">
+		<div class="row">
+			<div class="col-2">
+				<div class="pt-2">All Category <span class="badge badge-success">@Model.Count()</span></div>
+			</div>
+			<div class="col-5">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">Name</span>
+					</div>
+					<input type="text" class="form-control" name="Name" placeholder="Category name" aria-label="name" aria-describedby="basic-addon1" required>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<label class="input-group-text" for="inputGroupSelect01">Status</label>
+					</div>
+					<select class="custom-select" name="Status" id="inputGroupSelect01">
+						<option value="1">Published</option>
+						<option value="0">Un-Published</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-2">
+				<button class="btn btn-success btn-block" type="submit">Add Category</button>
+			</div>
+		</div>
+	</form><hr>
+	<table id="table_id" class="table table-striped table-bordered order-column" width="100%">
+		<thead>
+			<tr>
+				<th scope="col">Category Name</th>
+				<th scope="col">Article</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th scope="col">Category Name</th>
+				<th scope="col">Article</th>
+				<th scope="col">Action</th>
+			</tr>
+		</tfoot>
+		<tbody>
+		@foreach (var category in Model)
+		{
+			<tr>
+				<td>
+					<a href="/Home/Category/@category.ID" class="text-primary" style="text-decoration: none;">@category.Name</a>
+				</td>
+				<td>@category.tbl_article.Count</td>
+				<td>
+					<form action="/Admin/CategoryUpdate/@category.ID" method="post" class="d-inline">
+						<input type="hidden" name="Name" value="@category.Name">
+						@if (category.Status == 1)
+		{
+				<input type="hidden" name="Status" value="0">
+				<button class="btn btn-success" type="submit"><i class="fas fa-check"></i></button>
+}
+else
+{
+				<input type="hidden" name="Status" value="1" />
+				<button class="btn btn-dark" type="submit"><i class="fas fa-times"></i></button>
+}
+					</form>
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#@category.Name"><i class="far fa-edit"></i></button>
+					<div class="modal fade" id="@category.Name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Edit Category</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form action="/Admin/CategoryUpdate/@category.ID" method="post">
+									<div class="modal-body">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon1">Name</span>
+											</div>
+											<input type="text" class="form-control" name="Name" value="@category.Name" aria-label="name" aria-describedby="basic-addon1">
+										</div>
+
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<label class="input-group-text" for="inputGroupSelect01">Status</label>
+											</div>
+											<select class="custom-select" name="Status" id="inputGroupSelect01">
+												@if (category.Status == 1)
+								{
+									<option value="1">Published</option>
+									<option value="0">Un-Published</option>
+				}
+				else
+				{
+					<option value="0">Un-Published</option>
+					<option value="1">Published</option>
+}
+											</select>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<button class="btn btn-success" type="submit">Update</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal-@category.ID"><i class="far fa-trash-alt"></i></button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="Modal-@category.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title text-center" id="exampleModalLabel">Delete Category</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">Are you sure ?</div>
+								<div class="modal-footer">
+									<form action="/Admin/CategoryDelete/@category.ID" method="post" class="d-inline">
+										<button type="submit" class="btn btn-primary">Yes</button>
+									</form>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		}
+		</tbody>
+	</table>
+</div>
+
+@section Scripts {
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#table_id').DataTable();
+		});
+	</script>
+}
+

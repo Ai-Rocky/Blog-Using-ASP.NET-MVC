@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Intro" Type="varchar" MaxLength="500" />
+    <Property Name="FacebookLink" Type="varchar" MaxLength="100" />
+    <Property Name="LinkedinLink" Type="varchar" MaxLength="100" />
+    <Property Name="GithubLink" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BloggerID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Details" Type="varchar(max)" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Views" Type="int" />
+    <Property Name="Date" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_blogger">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Intro" Type="varchar" MaxLength="500" />
+    <Property Name="FacebookLink" Type="varchar" MaxLength="100" />
+    <Property Name="LinkedinLink" Type="varchar" MaxLength="100" />
+    <Property Name="GithubLink" Type="varchar" MaxLength="100" />
+    <Property Name="Image" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_article_tbl_blogger">
+    <End Role="tbl_blogger" Type="Self.tbl_blogger" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_article" Type="Self.tbl_article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_blogger">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_article">
+        <PropertyRef Name="BloggerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_article_tbl_category">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_article" Type="Self.tbl_article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_article">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BlogModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_admin" EntityType="Self.tbl_admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_article" EntityType="Self.tbl_article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_blogger" EntityType="Self.tbl_blogger" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_category" EntityType="Self.tbl_category" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_article_tbl_blogger" Association="Self.FK_tbl_article_tbl_blogger">
+      <End Role="tbl_blogger" EntitySet="tbl_blogger" />
+      <End Role="tbl_article" EntitySet="tbl_article" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_article_tbl_category" Association="Self.FK_tbl_article_tbl_category">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_article" EntitySet="tbl_article" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

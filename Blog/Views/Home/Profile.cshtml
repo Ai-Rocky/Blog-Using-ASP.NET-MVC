@@ -1,0 +1,93 @@
+﻿@model Blog.ViewModels.ArticleViewModel
+@{
+	ViewBag.Title = "Profile";
+	Layout = "~/Views/Home/_MasterPage.cshtml";
+}
+
+<div class="container mt-5">
+	<div class="row">
+
+		<div class="col-md-4">
+			<div class="card">
+				<img class="card-img-top" src="../../Images/@Model.profile.Image" alt="Card image cap">
+				<div class="card-body text-center">
+					<h5 class="card-title">@Model.profile.Name</h5>
+					<p class="card-text">@Model.profile.Intro</p>
+					<a href="@Model.profile.FacebookLink" class="btn btn-primary btn-block">Facebook</a>
+					<a href="@Model.profile.LinkedinLink" class="btn btn-primary btn-block">Linkedin</a>
+					<a href="@Model.profile.GithubLink" class="btn btn-primary btn-block">Github</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-8">
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Recent Article</a>
+					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Trending Article</a>
+					<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Oldest Article</a>
+					<div class="pt-2 mx-4">My Article <span class="badge badge-success">@Model.article.Count</span></div>
+					<div class="pt-2">Total views <span class="badge badge-success">@Model.article.Sum(x=> x.Views)</span></div>
+				</div>
+			</nav>
+			<div class="tab-content mt-0" id="nav-tabContent">
+				<div class="tab-content mt-0" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+					@foreach (var article in Model.article)
+					{
+						<div class="card mb-0 border-top-0">
+							<div class="card-body">
+								<h1 class="display-4 d-inline" style="font-size: 2rem;font-weight:400"><a href="/Home/Details/@article.ID" style="text-decoration: none;color: #212529;">@article.Title</a></h1>
+								<p class="card-text mt-3">
+									<small class="text-muted">
+										<span class="mr-3"><i class="fas fa-book"></i> <a href="/Home/Category/@article.CategoryID">@article.tbl_category.Name</a></span>
+										<span class="mr-3"><i class="far fa-calendar-alt"></i> @article.Date</span>
+										<span><i class="fas fa-eye"></i> @article.Views</span>
+									</small>
+								</p>
+							</div>
+						</div>
+					}
+					
+					</div>
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+					@foreach (var article in Model.trendArticle)
+					{
+						<div class="card mb-0 border-top-0">
+							<div class="card-body">
+								<h1 class="display-4 d-inline" style="font-size: 2rem;font-weight:400"><a href="/Home/Details/@article.ID" style="text-decoration: none;color: #212529;">@article.Title</a></h1>
+								<p class="card-text mt-3">
+									<small class="text-muted">
+										<span class="mr-3"><i class="fas fa-book"></i> <a href="/Home/Category/@article.CategoryID">@article.tbl_category.Name</a></span>
+										<span class="mr-3"><i class="far fa-calendar-alt"></i> @article.Date</span>
+										<span><i class="fas fa-eye"></i> @article.Views</span>
+									</small>
+								</p>
+							</div>
+						</div>
+					}
+					</div>
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+					@foreach (var article in Model.oldArticle)
+					{
+						<div class="card mb-0 border-top-0">
+							<div class="card-body">
+								<h1 class="display-4 d-inline" style="font-size: 2rem;font-weight:400"><a href="/Home/Details/@article.ID" style="text-decoration: none;color: #212529;">@article.Title</a></h1>
+								<p class="card-text mt-3">
+									<small class="text-muted">
+										<span class="mr-3"><i class="fas fa-book"></i> <a href="/Home/Category/@article.CategoryID">@article.tbl_category.Name</a></span>
+										<span class="mr-3"><i class="far fa-calendar-alt"></i> @article.Date</span>
+										<span><i class="fas fa-eye"></i> @article.Views</span>
+									</small>
+								</p>
+							</div>
+						</div>
+					}
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

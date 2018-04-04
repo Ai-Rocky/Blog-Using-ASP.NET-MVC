@@ -1,0 +1,35 @@
+﻿@model Blog.ViewModels.ArticleViewModel
+@{
+	ViewBag.Title = "Dashboard";
+	Layout = "_MasterPage.cshtml";
+}
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col">
+			<div class="card text-white bg-secondary mb-3">
+				<div class="card-header"><h1 class="display-4"><i class="fas fa-users"></i> Blogger</h1></div>
+				<div class="card-body">
+					<h1 class="display-1">@Model.blogger.Count</h1>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card text-white bg-info mb-3">
+				<div class="card-header"><h1 class="display-4"><i class="fas fa-bars"></i> Category</h1></div>
+				<div class="card-body">
+					<h1 class="display-1">@Model.category.Count</h1>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card text-white bg-dark mb-3">
+				<div class="card-header"><h1 class="display-4"><i class="far fa-newspaper"></i> Article</h1></div>
+				<div class="card-body">
+					<h1 class="display-1">@Model.article.Count</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

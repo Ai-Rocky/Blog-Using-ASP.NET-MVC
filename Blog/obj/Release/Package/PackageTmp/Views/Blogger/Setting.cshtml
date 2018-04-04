@@ -1,0 +1,204 @@
+﻿@using Blog.Models
+@{
+	ViewBag.Title = "Setting";
+	Layout = "~/Views/Blogger/_MasterPage.cshtml";
+
+	var blogger = (tbl_blogger)Session["Blogger"];
+}
+
+<div class="container mt-5">
+	<h1 class="display-4 text-center">Account Settings</h1><hr>
+	<div class="row">
+
+		<div class="col-md-4">
+			<img src="../../Images/@blogger.Image" alt="..." class="img-thumbnail w-100">
+
+			<button class="btn btn-dark btn-block my-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				<i class="far fa-image"></i> Change Image
+			</button>
+
+			<div class="collapse" id="collapseExample">
+				<div class="card card-body">
+					<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<input type="file" name="Image" class="form-control-file" id="exampleFormControlFile1">
+							<button name="btn" value="image" class="btn btn-info mt-3" type="submit">Upload</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-8">
+			<div id="accordion">
+				<h6 class="text-danger text-center">@TempData["PassError"]</h6>
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Name :</strong> @blogger.Name</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#name" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="name" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-9">
+										<input type="text" name="Name" class="form-control" placeholder="Write name here">
+									</div>
+									<div class="col-3">
+										<button type="submit" name="btn" value="name" class="btn btn-primary mb-2">Save Name</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Email :</strong> @blogger.Email</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#email" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="email" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-9">
+										<input type="email" name="Email" class="form-control" placeholder="Write email here">
+									</div>
+									<div class="col-3">
+										<button type="submit" name="btn" value="email" class="btn btn-primary mb-2">Save Email</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Password :</strong> ********</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#password" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="password" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-5">
+										<input type="password" name="OldPassword" class="form-control" placeholder="Old Password">
+									</div>
+									<div class="col-5">
+										<input type="password" name="NewPassword" class="form-control" placeholder="New Password">
+									</div>
+									<div class="col-2">
+										<button type="submit" name="btn" value="password" class="btn btn-primary mb-2">Save</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Intro :</strong> @blogger.Intro</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#intro" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="intro" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-9">
+										<textarea class="form-control" name="Intro" placeholder="Write intro here"></textarea>
+									</div>
+									<div class="col-3">
+										<button type="submit" name="btn" value="intro" class="btn btn-primary mb-2">Save Into</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Facebook Link :</strong> @blogger.FacebookLink</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#facebook" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="facebook" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-9">
+										<input type="text" name="FacebookLink" class="form-control" placeholder="Paste facebook link here">
+									</div>
+									<div class="col-3">
+										<button type="submit" name="btn" value="facebook" class="btn btn-primary mb-2">Save Facebook</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Linkedin Link :</strong> @blogger.LinkedinLink</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#linkedin" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="linkedin" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-9">
+										<input type="text" name="LinkedinLink" class="form-control" placeholder="Paste linkedin here">
+									</div>
+									<div class="col-3">
+										<button type="submit" name="btn" value="linkedin" class="btn btn-primary mb-2">Save Linkedin</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-header border-0" id="headingOne">
+						<span><strong>Github :</strong> @blogger.GithubLink</span>
+						<button class="btn btn-light float-right" data-toggle="collapse" data-target="#github" aria-expanded="true" aria-controls="collapseOne">
+							<i class="far fa-edit"></i> Edit
+						</button>
+					</div>
+					<div id="github" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form action="/Blogger/BloggerUpdate/@blogger.ID" method="post">
+								<div class="row">
+									<div class="col-9">
+										<input type="text" name="GithubLink" class="form-control" placeholder="Paste github here">
+									</div>
+									<div class="col-3">
+										<button type="submit" name="btn" value="github" class="btn btn-primary mb-2">Save Github</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
